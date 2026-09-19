@@ -16,7 +16,7 @@ first, keep the context clean second, save tokens third. Let the minions do the 
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex-black)](#what-has-been-tested-and-what-it-does-not-do)
 [![Format](https://img.shields.io/badge/format-Agent%20Skills-6f42c1)](#install)
 [![Scripts](https://img.shields.io/badge/scripts-none-brightgreen)](#faq)
-[![Version](https://img.shields.io/badge/version-0.1.0-lightgrey)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.1.1-lightgrey)](CHANGELOG.md)
 
 ```bash
 npx skills add humeicw/dirty-work
@@ -138,9 +138,9 @@ Uninstalling: see [AGENTS.md](AGENTS.md).
 
 ## Making it trigger
 
-Installing a skill does not guarantee the model loads it: agents consult skills when a task
-looks beyond them, and *"let me just check one file"* never does. Add this to your
-`CLAUDE.md` or `AGENTS.md`:
+**This step is required, not optional.** Installing a skill does not make the model load
+it: agents consult skills when a task looks beyond them, and *"let me just check one file"*
+never does. Add this to your `CLAUDE.md` or `AGENTS.md`:
 
 ```
 You must read the dirty-work skill and follow it before your first file read, grep or shell
@@ -156,11 +156,14 @@ The point is the *before*. Once the agent has read five files, the context is al
 spent.
 
 In a smoke test (14-file test repository, Claude Code 2.1.258, Sonnet, 6 requests the skill
-should catch, 2 runs each), it fired on 8 of 12 runs with the description alone and 12 of
+should catch, 2 runs each), it fired on 3 of 12 runs with the description alone and 12 of
 12 with this paragraph. On 4 requests it should ignore, it fired on 0 of 8 runs either way.
-Twelve of twelve is not "always": small sample, one machine, one model, the requests were
-also used to tune the wording, and the paragraph was injected with `--append-system-prompt`
-rather than a real `CLAUDE.md` in all but 3 spot checks.
+The description says which kinds of work the skill covers instead of listing phrases a user
+might type. An earlier phrase-list version reached 8 of 12 on its own, but no list of
+phrases is ever complete, and with the paragraph both reach 12 of 12. Twelve of twelve is
+not "always": small sample, one machine, one model, the same requests were used while
+choosing the wording, and the paragraph was injected with `--append-system-prompt` rather
+than a real `CLAUDE.md` in all but 3 spot checks.
 
 ## Why I made this
 
@@ -217,8 +220,8 @@ should work, since the skill is plain text, but I have not tried them.
 - Tier 1 and 2 subagents sometimes answer worse than the main agent would have. Section 7
   escalates, at the cost of a round trip.
 - Trigger reliability is the weak point of every skill, mine included. Without the paragraph
-  from [Making it trigger](#making-it-trigger), a third of the runs that should have loaded
-  the skill did not.
+  from [Making it trigger](#making-it-trigger), three quarters of the runs that should have
+  loaded the skill did not.
 
 ## How this differs from other delegation skills
 

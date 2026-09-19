@@ -7,7 +7,7 @@ not from an official Codex reference page. Treat them as a starting point and co
 against your own version before relying on them. Where the ecosystem disagrees, that is
 said explicitly.
 
-Last checked: 2026-09-18.
+Last checked: 2026-09-18. The "Role definitions" section was rechecked on 2026-09-19.
 
 ## Where Codex reads skills from
 
@@ -25,10 +25,14 @@ name the skills it can see.
 
 ## Role definitions
 
-This repository ships no Codex role files. I have not verified the Codex agent-definition
-format against an official reference, so I am not shipping files I cannot vouch for. Build
-your own, one per tier, following whatever format your Codex version uses: name, model,
-reasoning effort, and the role's instructions.
+This repository ships no Codex role files. The official Codex documentation
+(developers.openai.com/codex/subagents) describes custom agents as TOML files in
+`~/.codex/agents/` (personal) or `.codex/agents/` (project), with the fields `name`,
+`description`, `developer_instructions`, `model` and `model_reasoning_effort`. Setting
+`default_subagent_model` under `[agents]` in `config.toml` gives all of them a default. I
+use that format in my own setup, but I have not packaged and tested role files for this
+repository, so build your own, one per tier, and check the field names against the
+documentation for your Codex version.
 
 For the instruction text, take the Claude Code role files from the repository's `agents/`
 directory and drop the frontmatter. The instructions are portable between tools; the model

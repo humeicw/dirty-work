@@ -14,6 +14,28 @@ skill or the subagents, or the fix reaches nobody.
 
 Nothing yet.
 
+## [0.1.1] — 2026-09-19
+
+### Changed
+
+- `skills/dirty-work/SKILL.md`: the `description` now says which kinds of work the skill
+  covers (investigation, one-off rewrites that touch many places, migrations,
+  self-contained builds, at any size) instead of listing phrases a user might type. A list
+  of phrases is never complete. The body of the skill is unchanged.
+  Measured cost and benefit, same smoke test as before: the new description alone fired on
+  3 of 12 runs (the phrase list reached 8 of 12), and with the standing paragraph from the
+  README it fired on 12 of 12, the same as before. False fires stayed at 0 of 8. The README
+  now calls that paragraph required rather than recommended.
+- `skills/dirty-work/references/codex.md`: the "Role definitions" section now points to
+  the documented Codex custom-agent format (`~/.codex/agents/*.toml`) instead of saying the
+  format was unverified. Still no Codex role files ship here.
+
+### Docs
+
+- README: numeric before/after table (illustrative numbers, labelled as such) next to a
+  table of measured numbers, example models and list prices for each tier, and how to put
+  your own models (DeepSeek and others) on the tiers.
+
 ## [0.1.0] — 2026-09-19
 
 First public version. The rules themselves are not new: they are a cleaned-up, tool-neutral
@@ -64,5 +86,6 @@ Stated here rather than buried, because they are the reason this is 0.1.0 and no
 - The model column in the tier table is deliberately left for you to fill in. Tier
   definitions transfer between tools; model names go stale in months.
 
-[Unreleased]: https://github.com/humeicw/dirty-work/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/humeicw/dirty-work/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/humeicw/dirty-work/releases/tag/v0.1.1
 [0.1.0]: https://github.com/humeicw/dirty-work/releases/tag/v0.1.0

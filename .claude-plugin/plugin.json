@@ -1,7 +1,7 @@
 {
   "name": "dirty-work",
   "description": "Stops the main agent from reading everything itself. Investigation and bulk reading go to subagents that return conclusions, not file dumps. Routes each job to the smallest model tier that can do it.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "ISUN",
     "url": "https://github.com/humeicw"

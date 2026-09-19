@@ -12,7 +12,7 @@
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex-black)](#验证范围与局限)
 [![Format](https://img.shields.io/badge/format-Agent%20Skills-6f42c1)](#安装)
 [![Scripts](https://img.shields.io/badge/scripts-none-brightgreen)](#常见问题)
-[![Version](https://img.shields.io/badge/version-0.1.0-lightgrey)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.1.1-lightgrey)](CHANGELOG.md)
 
 ```bash
 npx skills add humeicw/dirty-work
@@ -110,7 +110,7 @@ Claude 桌面版 / claude.ai：把 `skills/dirty-work/` 打包成 zip 当技能�
 
 ## 怎么让它触发
 
-装上技能不等于模型会去用它：Agent 往往只在觉得"这活超出我能力"时才查技能，而"我就顺手看一个文件"永远不会让它这么觉得。在你的 `CLAUDE.md` 或 `AGENTS.md` 里加这一段：
+**这一步是必须的，不是可选的。** 装上技能不等于模型会去用它：Agent 往往只在觉得"这活超出我能力"时才查技能，而"我就顺手看一个文件"永远不会让它这么觉得。在你的 `CLAUDE.md` 或 `AGENTS.md` 里加这一段：
 
 ```
 You must read the dirty-work skill and follow it before your first file read, grep or shell
@@ -124,7 +124,7 @@ together turn by turn.
 
 意思是：凡是调查或排查问题、搜代码、读大量文件或日志、全仓库范围的改写或搬迁、跨多个文件的实现，在第一次读文件、搜索或跑命令之前，必须先读 dirty-work 技能并照着做，任务看起来再小也一样。不在这个范围里的就不要读：改一处指定的地方、眼前信息就能回答的问题、和用户一来一回共同写的文档。关键在"之前"两个字：等 Agent 已经读了五个文件，上下文就已经花出去了。
 
-我做过一次小测试（14 个文件的测试仓库，Claude Code 2.1.258，Sonnet，6 句应该触发的话各跑 2 次）：只靠技能描述，12 次里触发 8 次；加上这一段，12 次全部触发。4 句不该触发的话跑了 8 次，两种情况下都是 0 次误触发。12 次全中不等于"总会触发"：样本小，只有一台机器、一个模型，调措辞和测结果用的是同一批话，而且除了 3 次抽查，这一段是用 `--append-system-prompt` 注入的，不是真的放在 `CLAUDE.md` 里。
+我做过一次小测试（14 个文件的测试仓库，Claude Code 2.1.258，Sonnet，6 句应该触发的话各跑 2 次）：只靠技能描述，12 次里触发 3 次；加上这一段，12 次全部触发。4 句不该触发的话跑了 8 次，两种情况下都是 0 次误触发。技能描述写的是"这个技能管哪几类工作"，不去列举用户可能说的话。早先那版列举用户原话的描述，单靠自己能到 12 次里 8 次，但用户会说的话永远列不全，而且加上这一段之后两种写法都是 12 次全中。12 次全中不等于"总会触发"：样本小，只有一台机器、一个模型，挑措辞和测结果用的是同一批话，而且除了 3 次抽查，这一段是用 `--append-system-prompt` 注入的，不是真的放在 `CLAUDE.md` 里。
 
 ## 我为什么做这个
 
@@ -154,7 +154,7 @@ together turn by turn.
 - 好处是慢慢累积出来的：你会在一个跑了三小时、居然不用压缩上下文的会话里才注意到它。
 - 派活不是免费的。每个子 Agent 都要重新读一遍背景，所以真正的小任务自己干反而更省。**这是我的判断，不是 `SKILL.md` 里的规则**——技能正文的默认做法是把可独立执行的活派出去。
 - 1 档和 2 档的子 Agent，有时交回来的答案比主 Agent 自己做还差。技能第 7 节用升档来处理，但这要多跑一个来回。
-- 触发是否可靠，是所有技能共同的弱点，这一个也不例外。不加[怎么让它触发](#怎么让它触发)里那一段的话，该触发的运行里有三分之一没有触发。
+- 触发是否可靠，是所有技能共同的弱点，这一个也不例外。不加[怎么让它触发](#怎么让它触发)里那一段的话，该触发的运行里有四分之三没有触发。
 
 ## 它和别的派活技能有什么不一样
 
