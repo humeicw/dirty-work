@@ -1,0 +1,41 @@
+name: "Skill did not trigger"
+description: "It was installed, the situation clearly called for it, and the agent never loaded it."
+title: "Did not trigger: "
+labels: ["triggering"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The exact prompt is the part I cannot work without. Remove anything private first:
+        paths, tokens, customer or internal project names. Issues are public.
+
+  - type: textarea
+    id: prompt
+    attributes:
+      label: The exact prompt you gave the agent
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What the agent did instead, and what you expected
+    validations:
+      required: true
+
+  - type: input
+    id: setup
+    attributes:
+      label: Tool and model
+      description: "For example: Claude Code, opus."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reminder
+    attributes:
+      label: Did you add the always-on line from the README?
+      options: ["Yes", "No", "Not sure"]
+    validations:
+      required: true

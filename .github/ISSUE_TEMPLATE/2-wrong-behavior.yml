@@ -1,0 +1,41 @@
+name: "Wrong behavior"
+description: "The skill loaded, and then the agent did the wrong thing."
+title: "Wrong behavior: "
+labels: ["behavior"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Remove anything private before pasting: paths, tokens, customer or internal
+        project names. Issues are public.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What went wrong
+      options:
+        - Delegated something that should have stayed with the main agent
+        - Kept something it should have delegated
+        - Picked the wrong tier
+        - Subagent returned raw material instead of conclusions
+        - Main agent duplicated a subagent's work
+        - Escalation behaved badly
+        - Two rules in SKILL.md contradict each other
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened, and what should have happened
+    validations:
+      required: true
+
+  - type: input
+    id: setup
+    attributes:
+      label: Tool, model, and version
+      description: "Version is the `version` field in .claude-plugin/plugin.json, or the date you installed."
+    validations:
+      required: true

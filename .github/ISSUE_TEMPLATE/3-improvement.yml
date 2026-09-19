@@ -1,0 +1,26 @@
+name: "Improvement or idea"
+description: "A missing rule, wording that is hard to read, install instructions that are wrong."
+title: "Improvement: "
+labels: ["improvement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Two things this repository declines: scripts or a runtime, and a second skill in
+        this repository. The rest of the list is in CONTRIBUTING.md.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve
+      description: "The situation where the current version let you down. Concrete beats abstract."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you propose
+      description: "For a wording change, write the replacement text. SKILL.md loads in full every time the skill fires, so say what you would cut to pay for an addition."
+    validations:
+      required: true

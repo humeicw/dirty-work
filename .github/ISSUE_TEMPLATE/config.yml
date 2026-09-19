@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security or prompt-injection report
+    url: "https://github.com/humeicw/dirty-work/security/advisories/new"
+    about: Do not open a public issue for this. Use private vulnerability reporting, described in SECURITY.md.
+  - name: Install and trigger instructions
+    url: "https://github.com/humeicw/dirty-work#install"
+    about: How to install it, and the short paragraph you have to add before the skill will load reliably.

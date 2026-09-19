@@ -1,0 +1,25 @@
+{
+  "name": "dirty-work",
+  "owner": {
+    "name": "ISUN",
+    "url": "https://github.com/humeicw"
+  },
+  "description": "Delegation decision rules for the main agent, plus ready-made tier subagents.",
+  "plugins": [
+    {
+      "name": "dirty-work",
+      "source": "./",
+      "description": "Stops the main agent from reading everything itself. Investigation and bulk reading go to subagents that return conclusions, not file dumps. Routes each job to the smallest model tier that can do it.",
+      "version": "0.1.0",
+      "license": "MIT",
+      "category": "workflow",
+      "tags": [
+        "agent-skills",
+        "subagents",
+        "delegation",
+        "context-rot",
+        "model-routing"
+      ]
+    }
+  ]
+}

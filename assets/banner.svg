@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" width="1280" height="360" role="img" aria-label="dirty-work — let the subagents do the dirty work, your main context stays clean">
+  <title>dirty-work</title>
+  <desc>The main agent hands investigation and bulk reading to tier 1 to tier 4 subagents, which return conclusions instead of file dumps.</desc>
+
+  <!-- panel: carries its own background so the banner reads the same on light and dark pages -->
+  <rect x="1" y="1" width="1278" height="358" rx="18" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+
+  <!-- wordmark -->
+  <text x="80" y="152" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="84" font-weight="700" fill="#f0f6fc">dirty-work</text>
+  <rect x="80" y="176" width="120" height="5" rx="2.5" fill="#58a6ff"/>
+
+  <text x="80" y="230" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="27" fill="#c9d1d9">Let the subagents do the dirty work.</text>
+  <text x="80" y="268" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="27" fill="#8b949e">Your main context stays clean.</text>
+  <text x="80" y="310" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="18" fill="#6e7681">Delegation rules for Claude Code, Codex and any Agent Skills tool.</text>
+
+  <!-- diagram: main agent -->
+  <rect x="755" y="126" width="180" height="68" rx="12" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="845" y="152" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="24" fill="#58a6ff">main agent</text>
+  <text x="845" y="178" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" fill="#8b949e">context stays clean</text>
+
+  <!-- diagram: outgoing work -->
+  <text x="975" y="34" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" fill="#6e7681">the digging goes out</text>
+
+  <path d="M935 160 C985 160 985 76 1040 76" fill="none" stroke="#6e7681" stroke-width="1.8"/>
+  <polygon points="1040,70 1051,76 1040,82" fill="#6e7681"/>
+  <path d="M935 160 C985 160 985 132 1040 132" fill="none" stroke="#6e7681" stroke-width="1.8"/>
+  <polygon points="1040,126 1051,132 1040,138" fill="#6e7681"/>
+  <path d="M935 160 C985 160 985 188 1040 188" fill="none" stroke="#6e7681" stroke-width="1.8"/>
+  <polygon points="1040,182 1051,188 1040,194" fill="#6e7681"/>
+  <path d="M935 160 C985 160 985 244 1040 244" fill="none" stroke="#6e7681" stroke-width="1.8"/>
+  <polygon points="1040,238 1051,244 1040,250" fill="#6e7681"/>
+
+  <!-- diagram: the four tiers -->
+  <rect x="1052" y="54" width="118" height="44" rx="8" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
+  <text x="1111" y="82" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21" fill="#8b949e">tier 1</text>
+  <rect x="1052" y="110" width="118" height="44" rx="8" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
+  <text x="1111" y="138" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21" fill="#8b949e">tier 2</text>
+  <rect x="1052" y="166" width="118" height="44" rx="8" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
+  <text x="1111" y="194" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21" fill="#8b949e">tier 3</text>
+  <rect x="1052" y="222" width="118" height="44" rx="8" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
+  <text x="1111" y="250" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21" fill="#8b949e">tier 4</text>
+
+  <!-- diagram: what comes back -->
+  <path d="M1111 270 V300 H845 V206" fill="none" stroke="#58a6ff" stroke-width="1.8"/>
+  <polygon points="839,206 845,196 851,206" fill="#58a6ff"/>
+  <text x="978" y="324" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="21" fill="#58a6ff">conclusions, not file dumps</text>
+</svg>
