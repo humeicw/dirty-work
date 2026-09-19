@@ -6,9 +6,11 @@
 
 **Your agent has subagents. It still reads everything itself.**
 
-A skill that sends investigation and bulk reading to a subagent, takes back conclusions
-instead of the material, and routes each job to the smallest model tier that can do it. The
-name is the idiom: the digging goes out, the responsibility does not.
+A skill that makes the main agent send investigation and bulk reading to subagents, take
+back only the conclusions its current task needs instead of a pile of raw material, and
+route each job to the smallest model tier that can do it well. Less context rot, fewer
+tokens burned on your most expensive model, and the order is fixed: get the job right
+first, keep the context clean second, save tokens third. Let the minions do the dirty work.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Works with](https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex-black)](#what-has-been-tested-and-what-it-does-not-do)
@@ -22,16 +24,30 @@ npx skills add humeicw/dirty-work
 
 ## Before and after
 
-Same request: *"figure out why the build broke after last week's merge."*
+Same request, one hour in: *"figure out why the build broke after last week's merge."*
 
-| Without this skill | With this skill |
+| After one hour | Without this skill | With dirty-work |
+|---|---|---|
+| How it works the problem | Greps, opens files and pulls build logs itself. All of it lands in the main conversation. | Sends one subagent to dig. Back come the root cause and the few lines that matter. |
+| Tokens in the main conversation | **~180k** | **~60k** |
+| Context window used | **90%** - *"context low, compacting"* | **30%** |
+| Share of that context that is about your question | **~15%** | **~85%** |
+| Cost of reading 1M tokens of logs and files | **$10** on the top model | **$1 to $2** on a tier-1 or tier-2 model |
+
+*Illustrative round numbers for a typical debugging session in a 200k-token window. They
+show the shape and are not a benchmark. Prices are list input prices on 2026-09-19.*
+
+What my own logs show, over 14 days of real work:
+
+| Measured | |
 |---|---|
-| Greps the repo, reads the CI config, opens six source files, pulls 400 lines of build log, all into the main conversation. | Decides first that this is investigation, so it goes out. One subagent gets the question and where to look. |
-| An hour later every file it touched is still in context, competing with your actual question. | Back comes a root cause, the lines that matter, and what could not be determined. The log stays in the subagent's thread. |
-| The whole job runs on whichever model you opened the session with. | A rename runs on the cheap tier; reasoning about the cause does not. |
-| You find out at *"context low, compacting."* | The main conversation still has room for your actual decision. |
+| Material read by subagents | ~19.0M tokens |
+| What came back into the main conversation | ~40.9k tokens, which is 0.21% |
+| Median size of what one delegation brought back | 272 tokens |
+| File reads and shell commands that ran inside subagents | 88% |
+| The one session where nothing was delegated (2026-09-03, about 4 hours) | main conversation grew from 65k to 290k tokens |
 
-That describes the mechanism, not a measurement: see [What I measured](#what-i-measured).
+How these were counted, and what they do not show: [What I measured](#what-i-measured).
 
 ## How it works
 
@@ -58,9 +74,32 @@ first hit.
 | **3 Reasoning** | ...hold one line of reasoning across interlocking steps. Approach and acceptance are fixed. | Implement an agreed design across modules, reason from evidence to a root cause. |
 | **4 Exploration** | ...find the path itself, or make a call that is hard to undo. | Debug a failure with no known source, set shared rules, decisions touching production. |
 
-The skill's copy of this table has a model column you fill in once; tier definitions
-transfer between tools, model names do not. Once tier 4 has settled the path, the rest
-drops to tier 3, scoped edits to tier 2, mechanical work to tier 1.
+Once tier 4 has settled the path, the rest drops to tier 3, scoped edits to tier 2,
+mechanical work to tier 1.
+
+### Which model for each tier
+
+What I run today, with list prices per 1M tokens (input / output) on 2026-09-19:
+
+| Tier | Claude Code | Price | Codex | Price |
+|---|---|---|---|---|
+| 1 | Haiku 4.5 | $1 / $5 | gpt-5.6-luna | $0.20 / $1.20 |
+| 2 | Sonnet 5 | $2 / $10 | gpt-5.6-terra | $2 / $12 |
+| 3 | Opus 5 | $5 / $25 | gpt-5.6-sol | $4 / $20 |
+| 4 | Fable 5.1 | $10 / $50 | gpt-6-astra | $10 / $50 |
+
+Tier 1 costs a tenth of tier 4 on Claude and a fiftieth on OpenAI.
+
+**Use your own models.** A tier is a definition, not a brand, and model names go stale in
+months. The skill's copy of the tier table has a model column you fill in once. In Claude
+Code each file in `agents/` has one `model:` line that takes an alias, `inherit` or a full
+model ID, and the `ANTHROPIC_DEFAULT_HAIKU_MODEL`, `..._SONNET_MODEL` and `..._OPUS_MODEL`
+environment variables point the aliases at something else. In Codex, set `model` in each
+`~/.codex/agents/*.toml` and add other providers under `[model_providers]` in
+`config.toml`. DeepSeek, for one, has an Anthropic-compatible endpoint, so `deepseek-flash`
+can take tiers 1 and 2 and `deepseek-v4-pro` tiers 3 and 4. I have only run Claude and
+OpenAI models myself. One rule: tiers 3 and 4 must not end up on the same model at the same
+effort, or four tiers collapse into three.
 
 ## Install
 
@@ -154,11 +193,9 @@ same window as work you care about.
 Fourteen days of my own Claude Code logs (2026-09-05 to 09-19), from the private version of
 these rules: 19 sessions that delegated, 114 dispatches plus 49 follow-ups.
 
-- The subagents worked through roughly 19.0M tokens of material. About 40,900 tokens of it
-  came back into the main conversation: 0.21%, a median of 272 tokens per dispatch.
-- 88% of all file reads and shell commands happened inside subagents.
-- Tier mix: 78% tier 3, 20% tiers 1 and 2, 2% tier 4. My work is mostly multi-step, so the
-  cheap tiers are the minority here.
+The numbers are in the second table under [Before and after](#before-and-after). Tier mix:
+78% tier 3, 20% tiers 1 and 2, 2% tier 4. My work is mostly multi-step, so the cheap tiers
+are the minority here.
 
 This is observational data from real, differing tasks, not a controlled comparison: it shows
 how much stayed out of the main context, not how much better the results were. Token counts
@@ -206,9 +243,11 @@ out. Responsibility does not: the main agent writes the work order, judges the a
 escalates when it is not good enough, and answers to you for the result.
 
 **Doesn't delegating use more tokens, not fewer?**
-Usually yes, in total: every subagent re-reads its background. What goes down is tokens in
-the main thread, the one that has to stay coherent for hours. If your goal is a lower total
-bill, this is the wrong tool.
+In total, often yes: every subagent re-reads its background. What goes down is tokens in
+the main thread, the one that has to stay coherent for hours, and tokens on your most
+expensive model: reading a million tokens of logs costs $10 on my tier-4 model and $1 on
+tier 1. Whether the bill drops depends on your mix. Most of my own work is tier 3, so what
+I count on is a cleaner context, not a smaller bill.
 
 **My model has a huge context window and my tool compacts automatically. Why isn't that
 enough?**
