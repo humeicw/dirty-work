@@ -210,10 +210,13 @@ are estimates, counted once per piece of material, not per cache re-read.
 ## What has been tested, and what it does not do
 
 The rules have daily use behind them, in Claude Code and Codex, from a private version of
-this skill. **The packaging has only had a load test**: loaded with `claude --plugin-dir`,
-the skill and all seven agents register, and tier 1 and tier 4 each answered one call.
-Nobody has run `/plugin marketplace add` or `npx skills add` yet. Other Agent Skills tools
-should work, since the skill is plain text, but I have not tried them.
+this skill. **The packaging has had less testing**: on 2026-09-23, on one Windows machine
+with a fresh, empty config, both install routes worked. `/plugin marketplace add` plus
+`/plugin install` (Claude Code 2.1.258) installed the skill and all seven agents;
+`npx skills add` (skills 1.7.0, targeting Claude Code) installed the complete skill and
+parsed its description. Earlier, loaded with `claude --plugin-dir`, tier 1 and tier 4 each
+answered one call. Install-then-invoke in one real session is not tested yet. Other Agent
+Skills tools should work, since the skill is plain text, but I have not tried them.
 
 - The benefit is cumulative: you notice it three hours into a session that did not need
   compacting.

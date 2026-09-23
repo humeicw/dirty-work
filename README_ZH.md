@@ -151,7 +151,7 @@ together turn by turn.
 
 ## 验证范围与局限
 
-这套决策规则有日常使用撑着，我每天在 Claude Code 和 Codex 上用它的私有版本。**但这个安装包本身只做过一次加载测试**：用 `claude --plugin-dir` 加载，技能和七个子 Agent 都能注册，1 档和 4 档各成功调用了一次。还没有人跑过 `/plugin marketplace add` 或 `npx skills add`。其他支持 Agent Skills 的工具应该能用，因为技能是纯文字，但我没试过。
+这套决策规则有日常使用撑着，我每天在 Claude Code 和 Codex 上用它的私有版本。**但这个安装包本身测得还不多**：2026-09-23 我在一台 Windows 电脑上，用全新的空配置跑了两条安装命令，都装成功了。一条是 `/plugin marketplace add` 加 `/plugin install`（Claude Code 2.1.258），装完能看到技能和七个子 Agent；另一条是 `npx skills add`（skills 1.7.0，装给 Claude Code），技能文件完整，描述能正常读出。更早用 `claude --plugin-dir` 加载时，1 档和 4 档各成功调用了一次。从装好到在对话里真正调用，这一整套流程还没连起来测过。其他支持 Agent Skills 的工具应该能用，因为技能是纯文字，但我没试过。
 
 - 好处是慢慢累积出来的：你会在一个跑了三小时、居然不用压缩上下文的会话里才注意到它。
 - 派活不是免费的。每个子 Agent 都要重新读一遍背景，所以真正的小任务自己干反而更省。**这是我的判断，不是 `SKILL.md` 里的规则**：技能正文的默认做法是把可独立执行的活派出去。

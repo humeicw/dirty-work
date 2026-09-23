@@ -17,6 +17,9 @@ skill or the subagents, or the fix reaches nobody.
 - `HISTORY.md` and `HISTORY_ZH.md`: how the rules got this way, eight changes before 0.1.0,
   each with the problem, the change and the measured result where there is one. Both front
   pages link to it. A short version is the "Before 0.1.0" section at the end of this file.
+- README: both install routes now tested once (2026-09-23, Windows, fresh empty config).
+  `/plugin marketplace add` + `/plugin install` (Claude Code 2.1.258) installed the skill
+  and the seven agents; `npx skills add` (skills 1.7.0) installed the skill for Claude Code.
 
 ## [0.1.1] — 2026-09-19
 
