@@ -15,6 +15,7 @@ agents/                       seven ready-made Claude Code subagents
 .github/                      issue forms and the pull request template
 assets/banner.svg             front-page banner
 README.md, README_ZH.md       front pages, English and Chinese
+HISTORY.md, HISTORY_ZH.md     how the rules got this way, English and Chinese
 CONTRIBUTING.md               what helps, what is declined, the pre-PR checklist
 SECURITY.md                   what ships, and how to report a problem
 CHANGELOG.md                  Keep a Changelog; version bumps are what trigger updates

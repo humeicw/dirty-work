@@ -191,6 +191,9 @@ Those are other people's findings, not mine. The second reason is usage: on a su
 the scarce thing is your rate-limit window, and a tier-1 job on a frontier model burns the
 same window as work you care about.
 
+What went wrong before each rule was added, and what changed after, is in
+[How these rules got this way](HISTORY.md).
+
 ## What I measured
 
 Fourteen days of my own Claude Code logs (2026-09-05 to 09-19), from the private version of
