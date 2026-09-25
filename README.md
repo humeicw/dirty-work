@@ -163,7 +163,10 @@ the wording, so a second round used 10 new requests that were never used for tun
 12 with the description alone, 12 of 12 with the paragraph, and 0 of 8 false fires either
 way. The description says which kinds of work the skill covers instead of listing phrases a
 user might type. An earlier phrase-list version reached 8 of 12 on its own in the first
-round, but no list of phrases is ever complete, and with the paragraph both reach 12 of 12.
+round but 0 of 12 on the new requests, and two other rewordings also scored 0 of 12 there.
+Rewording the description did not help; the paragraph is what made the difference. With
+the paragraph, both the phrase list and the current description reach 12 of 12 in the
+first round.
 Twelve of twelve is not "always": small sample, one machine, one model, one run per
 condition, and the paragraph was injected with `--append-system-prompt` rather than a real
 `CLAUDE.md` in all but 3 spot checks.

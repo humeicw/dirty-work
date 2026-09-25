@@ -224,6 +224,24 @@ it handed the investigation to the built-in `Explore` subagent straight away, wi
 loading the skill; by the scoring rule that is not a fire. With the paragraph, the first step was the
 `Skill` call in all 12 runs. None of the 40 runs ended in an API error.
 
+### Other descriptions on the held-out requests
+
+Later the same day, three other descriptions were tried on the same ten requests, alone,
+two runs each: the 0.1.0 phrase list, an imperative version (close to word for word the
+standing paragraph), and the current kinds-of-work text plus six phrases from the list.
+
+| Description | Alone | False fires |
+|---|---|---|
+| phrase list (0.1.0) | 0 of 12 | 0 of 8 |
+| imperative | 0 of 12 | 0 of 8 |
+| kinds of work plus phrases | 0 of 12 | 0 of 8 |
+
+The imperative version was then run on nine more new requests (5 should fire, 4 should
+not): 0 of 10 alone, 10 of 10 with the paragraph, 0 of 8 false fires either way. The same
+text fired every time as a system-prompt line and never as the description. The phrase
+list's 8 of 12 in round 1 did not carry over to new requests, so it most likely came from
+phrases close to the tuning set. None of these descriptions replaced 0.1.1.
+
 ## Limitations
 
 - **Small sample.** Two runs per request, 20 runs per condition per round. Twelve of twelve

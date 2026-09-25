@@ -25,6 +25,9 @@ skill or the subagents, or the fix reaches nobody.
   tuning: the 0.1.1 description fired on 0 of 12 runs alone and 12 of 12 with the standing
   paragraph, with 0 of 8 false fires either way. Both front pages link to it and now give
   both rounds' numbers.
+- Trigger smoke test: the 0.1.0 phrase list and two other rewordings also fired on 0 of 12
+  held-out runs alone. The front pages now say so next to the phrase list's round-1 8 of 12.
+  The description is unchanged.
 
 ## [0.1.1] — 2026-09-19
 
