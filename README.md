@@ -155,15 +155,18 @@ together turn by turn.
 The point is the *before*. Once the agent has read five files, the context is already
 spent.
 
-In a smoke test (14-file test repository, Claude Code 2.1.258, Sonnet, 6 requests the skill
-should catch, 2 runs each), it fired on 3 of 12 runs with the description alone and 12 of
-12 with this paragraph. On 4 requests it should ignore, it fired on 0 of 8 runs either way.
-The description says which kinds of work the skill covers instead of listing phrases a user
-might type. An earlier phrase-list version reached 8 of 12 on its own, but no list of
-phrases is ever complete, and with the paragraph both reach 12 of 12. Twelve of twelve is
-not "always": small sample, one machine, one model, the same requests were used while
-choosing the wording, and the paragraph was injected with `--append-system-prompt` rather
-than a real `CLAUDE.md` in all but 3 spot checks.
+In a [smoke test](evals/trigger-smoke-test.md) (14-file test repository, Claude Code
+2.1.258, Sonnet, 6 requests the skill should catch, 2 runs each), it fired on 3 of 12 runs
+with the description alone and 12 of 12 with this paragraph. On 4 requests it should
+ignore, it fired on 0 of 8 runs either way. Those requests were also used while choosing
+the wording, so a second round used 10 new requests that were never used for tuning: 0 of
+12 with the description alone, 12 of 12 with the paragraph, and 0 of 8 false fires either
+way. The description says which kinds of work the skill covers instead of listing phrases a
+user might type. An earlier phrase-list version reached 8 of 12 on its own in the first
+round, but no list of phrases is ever complete, and with the paragraph both reach 12 of 12.
+Twelve of twelve is not "always": small sample, one machine, one model, one run per
+condition, and the paragraph was injected with `--append-system-prompt` rather than a real
+`CLAUDE.md` in all but 3 spot checks.
 
 ## Why I made this
 
@@ -226,8 +229,9 @@ Skills tools should work, since the skill is plain text, but I have not tried th
 - Tier 1 and 2 subagents sometimes answer worse than the main agent would have. Section 7
   escalates, at the cost of a round trip.
 - Trigger reliability is the weak point of every skill, mine included. Without the paragraph
-  from [Making it trigger](#making-it-trigger), three quarters of the runs that should have
-  loaded the skill did not.
+  from [Making it trigger](#making-it-trigger), the skill loaded on only 3 of the 24 runs
+  that should have loaded it, across both rounds of the
+  [smoke test](evals/trigger-smoke-test.md).
 
 ## How this differs from other delegation skills
 

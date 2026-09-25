@@ -20,6 +20,11 @@ skill or the subagents, or the fix reaches nobody.
 - README: both install routes now tested once (2026-09-23, Windows, fresh empty config).
   `/plugin marketplace add` + `/plugin install` (Claude Code 2.1.258) installed the skill
   and the seven agents; `npx skills add` (skills 1.7.0) installed the skill for Claude Code.
+- `evals/trigger-smoke-test.md`: method, isolation, requests and results of both rounds of
+  the trigger smoke test. Round 2 (2026-09-25) used 10 held-out requests never used for
+  tuning: the 0.1.1 description fired on 0 of 12 runs alone and 12 of 12 with the standing
+  paragraph, with 0 of 8 false fires either way. Both front pages link to it and now give
+  both rounds' numbers.
 
 ## [0.1.1] — 2026-09-19
 
